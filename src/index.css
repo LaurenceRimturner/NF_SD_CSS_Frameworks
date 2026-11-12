@@ -1,1 +1,145 @@
-/* Intentionally empty. Your styling approach goes here (or somewhere else, depending on the approach). */
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource/playfair-display/600.css";
+@import "@fontsource/playfair-display/700.css";
+
+/* An old reading room: dark wood shelves, parchment pages, leather covers
+   with gilt lettering. All colors of the app live here. */
+
+:root {
+  /* The wood of the room and the cream of the lettering on it. */
+  --background: oklch(0.27 0.05 50);
+  --background-grain: oklch(0.23 0.05 48);
+  --foreground: oklch(0.25 0.03 50);
+  --wood-foreground: oklch(0.95 0.03 85);
+
+  /* The parchment pages. */
+  --card: oklch(0.95 0.03 85);
+  --card-foreground: oklch(0.25 0.03 50);
+  --popover: oklch(0.95 0.03 85);
+  --popover-foreground: oklch(0.25 0.03 50);
+  --page-edge: oklch(0.8 0.04 78);
+
+  --primary: oklch(0.38 0.11 25);
+  --primary-foreground: oklch(0.96 0.02 85);
+  --secondary: oklch(0.89 0.04 80);
+  --secondary-foreground: oklch(0.25 0.03 50);
+  --muted: oklch(0.91 0.035 82);
+  --muted-foreground: oklch(0.42 0.03 55);
+  --accent: oklch(0.72 0.12 85);
+  --accent-foreground: oklch(0.25 0.03 50);
+  --destructive: oklch(0.5 0.19 27);
+
+  --border: oklch(0.8 0.04 75);
+  --input: oklch(0.8 0.04 75);
+  /* Focus ring: bright brass on the wood, dark brass on the parchment. */
+  --ring: oklch(0.85 0.13 85);
+  --ring-page: oklch(0.45 0.11 65);
+  --radius: 0.375rem;
+
+  /* The cover leathers, one after the other, and their gilt lettering. */
+  --cover-1: oklch(0.36 0.1 25);
+  --cover-2: oklch(0.36 0.08 155);
+  --cover-3: oklch(0.33 0.08 255);
+  --cover-4: oklch(0.42 0.08 60);
+  --cover-5: oklch(0.35 0.09 330);
+  --gilt: oklch(0.85 0.12 85);
+  --cover-foreground: oklch(0.96 0.02 85);
+
+  /* The bookmark ribbons, one per status. */
+  --ribbon-want: oklch(0.45 0.13 250);
+  --ribbon-reading: oklch(0.8 0.15 85);
+  --ribbon-done: oklch(0.45 0.11 150);
+  --ribbon-foreground: oklch(0.98 0.01 85);
+  --ribbon-reading-foreground: oklch(0.25 0.03 50);
+}
+
+@theme inline {
+  --font-sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-heading: var(--font-sans);
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+
+  --color-background: var(--background);
+  --color-background-grain: var(--background-grain);
+  --color-foreground: var(--foreground);
+  --color-wood-foreground: var(--wood-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-page-edge: var(--page-edge);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-cover-1: var(--cover-1);
+  --color-cover-2: var(--cover-2);
+  --color-cover-3: var(--cover-3);
+  --color-cover-4: var(--cover-4);
+  --color-cover-5: var(--cover-5);
+  --color-gilt: var(--gilt);
+  --color-cover-foreground: var(--cover-foreground);
+
+  --color-ribbon-want: var(--ribbon-want);
+  --color-ribbon-reading: var(--ribbon-reading);
+  --color-ribbon-done: var(--ribbon-done);
+  --color-ribbon-foreground: var(--ribbon-foreground);
+  --color-ribbon-reading-foreground: var(--ribbon-reading-foreground);
+
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.5);
+  --radius-2xl: calc(var(--radius) * 2);
+  --radius-3xl: calc(var(--radius) * 2.5);
+  --radius-4xl: calc(var(--radius) * 3);
+}
+
+/* The block of pages under a book: thin paper lines along the bottom edge. */
+@utility pages {
+  box-shadow:
+    0 2px 0 var(--page-edge),
+    0 4px 0 var(--card),
+    0 6px 0 var(--page-edge);
+}
+
+/* The plank a row of books stands on. */
+@utility plank {
+  background-image: linear-gradient(
+    to bottom,
+    var(--gilt),
+    var(--background-grain) 18%,
+    var(--background-grain)
+  );
+  box-shadow: 0 10px 14px -6px oklch(0 0 0 / 0.5);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply min-h-dvh bg-background font-sans text-wood-foreground antialiased;
+    /* Faint wood grain over the dark wood. */
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent 0 3.5rem,
+      var(--background-grain) 3.5rem 3.625rem
+    );
+  }
+  /* On the parchment the ring must be dark enough to see. */
+  [data-slot="card"],
+  [data-slot="dialog-content"] {
+    --ring: var(--ring-page);
+  }
+}
