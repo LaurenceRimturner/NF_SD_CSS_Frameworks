@@ -1,1 +1,8 @@
-/* Intentionally empty. Your styling approach goes here (or somewhere else, depending on the approach). */
+@import "tailwindcss";
+@import "./tokens.generated.css";
+
+@layer base {
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+  }
+}

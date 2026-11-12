@@ -21,9 +21,10 @@ A reading list built with React 19, TypeScript and Vite. No backend, the data is
 
 <!-- TODO: Replace this section with the rules for the approach you chose. -->
 
-Choose exactly one styling approach per branch and write it down here **before** you build. Example for Tailwind:
+This branch (`feature/tailwind-book-cards`) uses Tailwind CSS v4. Design direction: modern, minimalist, Swiss style. Grid-based layout, one sans-serif typeface, strong hierarchy through size and weight, hairline rules instead of shadows, a monochrome palette with a single accent, flush-left text, generous whitespace.
 
-- Use Tailwind CSS v4 only. No `tailwind.config.js`, configure with `@theme` in `src/index.css`.
+- Use Tailwind CSS v4 only. No `tailwind.config.js`.
+- Colors, font and spacing unit live in `src/tokens.json`, shared with the other branches. `npm run tokens` turns them into the `@theme` in `src/tokens.generated.css` (do not edit it, `predev` and `prebuild` run it).
 - No inline `style` props, no other CSS libraries.
 - Reuse components. Do not repeat long class lists, extract a component.
 

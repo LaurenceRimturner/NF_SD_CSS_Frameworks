@@ -1,0 +1,9 @@
+/* Generated from src/tokens.json by scripts/build-tokens.mjs. Do not edit. */
+@theme {
+  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --color-ink: #111111;
+  --color-paper: #ffffff;
+  --color-accent: #e30613;
+  --color-signal: #ffd400;
+  --spacing: 0.25rem;
+}
