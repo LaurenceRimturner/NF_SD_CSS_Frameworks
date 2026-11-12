@@ -1,1 +1,16 @@
-/* Intentionally empty. Your styling approach goes here (or somewhere else, depending on the approach). */
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --color-paper: #ffffff;
+  --color-ink: #111111;
+  --color-accent: #e30613;
+  --color-signal: #ffd400;
+}
+
+@layer base {
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+  }
+}
