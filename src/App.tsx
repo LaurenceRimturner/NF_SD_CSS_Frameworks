@@ -1,21 +1,98 @@
-import { useBooks } from "./useBooks";
+import { useState } from "react";
 
-// This is the unstyled starting point. It only shows that the data flows.
-// Build your UI here and in new components, see SPEC.md.
+import BookCard from "./components/BookCard";
+import BookForm from "./components/BookForm";
+import Button from "./components/Button";
+import ConfirmDelete from "./components/ConfirmDelete";
+import EmptyState from "./components/EmptyState";
+import Toast from "./components/Toast";
+import ThemeToggle from "./components/ThemeToggle";
+import Toolbar from "./components/Toolbar";
+import { filterBooks } from "./books";
+import type { Book, NewBook, StatusFilter } from "./types";
+import { useBooks } from "./useBooks";
+import { useTheme } from "./useTheme";
+
+// `null` = closed, `{}` = add a book, `{ book }` = edit that book.
+type FormState = { book?: Book } | null;
+
 export default function App() {
-  const { books } = useBooks();
+  const { books, addBook, updateBook, deleteBook } = useBooks();
+  const { theme, toggleTheme } = useTheme();
+  const [status, setStatus] = useState<StatusFilter>("all");
+  const [query, setQuery] = useState("");
+  const [form, setForm] = useState<FormState>(null);
+  const [bookToDelete, setBookToDelete] = useState<Book | null>(null);
+  const [toast, setToast] = useState<string | null>(null);
+
+  const visibleBooks = filterBooks(books, { status, query });
+
+  function handleSave(data: NewBook) {
+    if (form?.book) {
+      updateBook(form.book.id, data);
+      setToast("Book updated");
+    } else {
+      addBook(data);
+      setToast("Book added");
+    }
+    setForm(null);
+  }
+
+  function handleDelete() {
+    if (!bookToDelete) return;
+    deleteBook(bookToDelete.id);
+    setToast("Book deleted");
+    setBookToDelete(null);
+  }
 
   return (
-    <main>
-      <h1>Reading List</h1>
-      <p>{books.length} books</p>
-      <ul>
-        {books.map((book) => (
-          <li key={book.id}>
-            {book.title} by {book.author} ({book.status})
-          </li>
-        ))}
-      </ul>
+    <main className="container-xl py-4 py-md-5">
+      <header className="d-flex flex-wrap align-items-end justify-content-between gap-3 border-bottom border-2 pb-3 mb-4">
+        <h1 className="display-4 fw-bold mb-0">Reading List</h1>
+        <div className="d-flex align-items-center gap-3">
+          <p className="fw-bold small mb-0">{books.length} books</p>
+          <ThemeToggle theme={theme} onToggle={toggleTheme} />
+          <Button variant="primary" onClick={() => setForm({})}>
+            + Add book
+          </Button>
+        </div>
+      </header>
+      <Toolbar
+        query={query}
+        status={status}
+        onQueryChange={setQuery}
+        onStatusChange={setStatus}
+      />
+      {visibleBooks.length === 0 ? (
+        <EmptyState />
+      ) : (
+        <ul className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4 list-unstyled">
+          {visibleBooks.map((book, index) => (
+            <BookCard
+              key={book.id}
+              book={book}
+              index={index}
+              onEdit={(b) => setForm({ book: b })}
+              onDelete={setBookToDelete}
+            />
+          ))}
+        </ul>
+      )}
+      {form && (
+        <BookForm
+          book={form.book}
+          onSave={handleSave}
+          onCancel={() => setForm(null)}
+        />
+      )}
+      {bookToDelete && (
+        <ConfirmDelete
+          book={bookToDelete}
+          onConfirm={handleDelete}
+          onCancel={() => setBookToDelete(null)}
+        />
+      )}
+      <Toast message={toast} onDismiss={() => setToast(null)} />
     </main>
   );
 }

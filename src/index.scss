@@ -1,0 +1,77 @@
+// Swiss look: square, flat, black and white with red and yellow accents.
+// Colors, font and spacing come from src/tokens.json (see _tokens.scss).
+@import "tokens";
+
+$enable-rounded: false;
+$enable-shadows: false;
+$border-width: 2px;
+$focus-ring-color: rgba($accent, 0.5);
+$focus-ring-width: $unit;
+
+// Dark mode (data-bs-theme="dark"): the same two colors, swapped.
+$body-color-dark: $paper;
+$body-bg-dark: $ink;
+$border-color-dark: $paper;
+// Follow the theme instead of the fixed ink from the tokens.
+$input-border-color: var(--bs-border-color);
+
+@import "bootstrap/scss/bootstrap";
+
+// The native <dialog> is not styled by Bootstrap.
+dialog {
+  width: calc(100% - 2rem);
+  max-width: 32rem;
+  margin: auto;
+}
+
+dialog::backdrop {
+  background: rgba($ink, 0.6);
+}
+
+// Theme-aware surfaces and buttons. Bootstrap's `*-dark` and `*-light`
+// classes have fixed colors, these follow `--bs-body-color` and `--bs-body-bg`.
+:root {
+  --swiss-fg: var(--bs-body-color);
+  --swiss-bg: var(--bs-body-bg);
+}
+
+// Swaps the two colors, for example a black card in light mode.
+.surface-inverse {
+  --bs-body-bg: var(--swiss-fg);
+  --bs-body-color: var(--swiss-bg);
+  --bs-card-border-color: var(--swiss-fg);
+}
+
+// Always signal yellow with ink text, in both modes.
+.surface-signal {
+  --bs-body-bg: #{$signal};
+  --bs-body-color: #{$ink};
+  --bs-card-border-color: #{$signal};
+}
+
+.surface-outline {
+  --bs-card-border-color: var(--bs-body-color);
+}
+
+.btn-ink {
+  --bs-btn-color: var(--bs-body-bg);
+  --bs-btn-bg: var(--bs-body-color);
+  --bs-btn-border-color: var(--bs-body-color);
+  --bs-btn-hover-color: #{$paper};
+  --bs-btn-hover-bg: #{$accent};
+  --bs-btn-hover-border-color: #{$accent};
+  --bs-btn-active-color: #{$paper};
+  --bs-btn-active-bg: #{$accent};
+  --bs-btn-active-border-color: #{$accent};
+}
+
+.btn-outline-ink {
+  --bs-btn-color: var(--bs-body-color);
+  --bs-btn-border-color: var(--bs-body-color);
+  --bs-btn-hover-color: var(--bs-body-bg);
+  --bs-btn-hover-bg: var(--bs-body-color);
+  --bs-btn-hover-border-color: var(--bs-body-color);
+  --bs-btn-active-color: var(--bs-body-bg);
+  --bs-btn-active-bg: var(--bs-body-color);
+  --bs-btn-active-border-color: var(--bs-body-color);
+}
