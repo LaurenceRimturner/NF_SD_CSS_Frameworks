@@ -6,16 +6,19 @@ import Button from "./components/Button";
 import ConfirmDelete from "./components/ConfirmDelete";
 import EmptyState from "./components/EmptyState";
 import Toast from "./components/Toast";
+import ThemeToggle from "./components/ThemeToggle";
 import Toolbar from "./components/Toolbar";
 import { filterBooks } from "./books";
 import type { Book, NewBook, StatusFilter } from "./types";
 import { useBooks } from "./useBooks";
+import { useTheme } from "./useTheme";
 
 // `null` = closed, `{}` = add a book, `{ book }` = edit that book.
 type FormState = { book?: Book } | null;
 
 export default function App() {
   const { books, addBook, updateBook, deleteBook } = useBooks();
+  const { theme, toggleTheme } = useTheme();
   const [status, setStatus] = useState<StatusFilter>("all");
   const [query, setQuery] = useState("");
   const [form, setForm] = useState<FormState>(null);
@@ -44,10 +47,11 @@ export default function App() {
 
   return (
     <main className="container-xl py-4 py-md-5">
-      <header className="d-flex flex-wrap align-items-end justify-content-between gap-3 border-bottom border-2 border-dark pb-3 mb-4">
+      <header className="d-flex flex-wrap align-items-end justify-content-between gap-3 border-bottom border-2 pb-3 mb-4">
         <h1 className="display-4 fw-bold mb-0">Reading List</h1>
         <div className="d-flex align-items-center gap-3">
           <p className="fw-bold small mb-0">{books.length} books</p>
+          <ThemeToggle theme={theme} onToggle={toggleTheme} />
           <Button variant="primary" onClick={() => setForm({})}>
             + Add book
           </Button>

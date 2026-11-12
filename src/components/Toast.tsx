@@ -21,7 +21,7 @@ export default function Toast({ message, onDismiss }: ToastProps) {
       className="position-fixed bottom-0 end-0 p-3 pe-none"
     >
       {message && (
-        <div className="alert alert-warning border-dark fw-bold text-uppercase small mb-0">
+        <div className="alert border-dark bg-warning text-dark fw-bold text-uppercase small mb-0">
           {message}
         </div>
       )}

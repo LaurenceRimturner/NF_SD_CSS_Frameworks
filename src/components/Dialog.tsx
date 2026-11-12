@@ -27,7 +27,7 @@ export default function Dialog({ title, onClose, children }: DialogProps) {
       ref={ref}
       aria-labelledby={titleId}
       onClose={onClose}
-      className="border border-dark bg-white p-4"
+      className="border bg-body text-body p-4"
     >
       <h2 id={titleId} className="h2 fw-bold mb-4">
         {title}

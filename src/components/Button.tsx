@@ -5,8 +5,8 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const VARIANTS: Record<NonNullable<ButtonProps["variant"]>, string> = {
-  primary: "btn-dark",
-  secondary: "btn-outline-dark",
+  primary: "btn-ink",
+  secondary: "btn-outline-ink",
   danger: "btn-danger",
 };
 

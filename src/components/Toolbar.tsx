@@ -49,7 +49,7 @@ export default function Toolbar({
               type="button"
               aria-pressed={status === value}
               onClick={() => onStatusChange(value)}
-              className={`btn btn-outline-dark fw-bold text-uppercase ${
+              className={`btn btn-outline-ink fw-bold text-uppercase ${
                 status === value ? "active" : ""
               }`}
             >

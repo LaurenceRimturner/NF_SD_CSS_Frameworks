@@ -23,7 +23,8 @@ This branch (`feature/bootstrap-book-cards`) uses Bootstrap 5.3 with Sass:
 
 - Use Bootstrap classes only. Customize with Sass variables in `src/index.scss`, set before `@import "bootstrap/scss/bootstrap"`. No other CSS libraries.
 - Colors, font and spacing unit live in `src/tokens.json`, shared with the other branches. `npm run tokens` turns them into Sass variables in `src/_tokens.scss` (do not edit it, `predev` and `prebuild` run it).
-- Own CSS is allowed only for what Bootstrap cannot do (the `<dialog>` size and backdrop), in `src/index.scss`.
+- Own CSS is allowed only for what Bootstrap cannot do, in `src/index.scss`: the `<dialog>` size and backdrop, and the theme-aware surfaces and buttons (`surface-*`, `btn-ink`, `btn-outline-ink`).
+- Dark mode uses Bootstrap's `data-bs-theme` on `<html>`, set by `src/useTheme.ts`. It follows the system setting until the reader uses the toggle. Do not use the fixed `*-dark` / `*-light` / `bg-white` classes for surfaces, they do not follow the theme.
 - No inline `style` props. No Bootstrap JavaScript, the dialogs use the native `<dialog>`.
 - Reuse components. Do not repeat long class lists, extract a component.
 - Design direction: modern, minimalist, Swiss style. Square corners, no shadows, Helvetica, hairline rules, black and white with red and yellow accents.
