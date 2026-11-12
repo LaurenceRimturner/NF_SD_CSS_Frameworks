@@ -1,13 +1,5 @@
 @import "tailwindcss";
-
-@theme {
-  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-  --color-paper: #ffffff;
-  --color-ink: #111111;
-  --color-accent: #e30613;
-  --color-signal: #ffd400;
-}
+@import "./tokens.generated.css";
 
 @layer base {
   body {

@@ -4,7 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "tokens": "node scripts/build-tokens.mjs tailwind",
+    "predev": "npm run tokens",
     "dev": "vite",
+    "prebuild": "npm run tokens",
     "build": "vite build",
     "serve": "vite preview",
     "test": "vitest",
