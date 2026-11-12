@@ -1,0 +1,28 @@
+// Swiss look: square, flat, black and white with red and yellow accents.
+$font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$body-color: #111;
+$body-bg: #fff;
+$primary: #111;
+$dark: #111;
+$danger: #e30613;
+$warning: #ffd400;
+$enable-rounded: false;
+$enable-shadows: false;
+$border-width: 2px;
+$border-color: #111;
+$input-border-color: #111;
+$focus-ring-color: rgba(227, 6, 19, 0.5);
+$focus-ring-width: 0.25rem;
+
+@import "bootstrap/scss/bootstrap";
+
+// The native <dialog> is not styled by Bootstrap.
+dialog {
+  width: calc(100% - 2rem);
+  max-width: 32rem;
+  margin: auto;
+}
+
+dialog::backdrop {
+  background: rgba(17, 17, 17, 0.6);
+}
