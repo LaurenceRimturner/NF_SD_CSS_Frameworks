@@ -1,9 +1,13 @@
 /* Generated from src/tokens.json by scripts/build-tokens.mjs. Do not edit. */
 @theme {
-  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --color-ink: #111111;
+  --font-sans: "Segoe UI", Frutiger, Tahoma, Geneva, Verdana, sans-serif;
+  --color-ink: #0b2540;
   --color-paper: #ffffff;
-  --color-accent: #e30613;
-  --color-signal: #ffd400;
+  --color-sky: #5bb8f0;
+  --color-ocean: #1565b8;
+  --color-aqua: #8fe6e1;
+  --color-leaf: #5cc65a;
+  --color-amber: #f6b73c;
+  --color-crimson: #c62d22;
   --spacing: 0.25rem;
 }

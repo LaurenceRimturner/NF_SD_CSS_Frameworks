@@ -4,10 +4,14 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: "primary" | "secondary" | "danger";
 };
 
+// The gloss is a white layer on the top half, like the Aero buttons.
+const BASE =
+  "cursor-pointer rounded-md border px-4 py-2 text-sm font-bold shadow-sm shadow-ocean/40 inset-shadow-xs inset-shadow-white/80 bg-linear-to-b from-white/70 from-50% to-white/0 to-50% transition hover:brightness-105 active:translate-y-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean";
+
 const VARIANTS: Record<NonNullable<ButtonProps["variant"]>, string> = {
-  primary: "border-ink bg-ink text-paper hover:border-accent hover:bg-accent",
-  secondary: "border-ink bg-paper text-ink hover:bg-ink hover:text-paper",
-  danger: "border-accent bg-accent text-paper hover:border-ink hover:bg-ink",
+  primary: "border-ocean bg-sky text-ink",
+  secondary: "border-ocean/60 bg-ocean/15 text-ink",
+  danger: "border-crimson bg-crimson/15 text-crimson",
 };
 
 export default function Button({
@@ -19,7 +23,7 @@ export default function Button({
   return (
     <button
       type={type}
-      className={`cursor-pointer border-2 px-4 py-2 text-sm font-bold uppercase tracking-wider focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${VARIANTS[variant]} ${className}`}
+      className={`${BASE} ${VARIANTS[variant]} ${className}`}
       {...props}
     />
   );

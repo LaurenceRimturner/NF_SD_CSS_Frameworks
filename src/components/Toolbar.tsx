@@ -1,6 +1,8 @@
 import { STATUS_LABELS } from "../books";
 import type { Status, StatusFilter } from "../types";
+import Button from "./Button";
 import { INPUT_CLASSES } from "./Field";
+import Panel from "./Panel";
 
 type ToolbarProps = {
   query: string;
@@ -17,6 +19,10 @@ const OPTIONS: { value: StatusFilter; label: string }[] = [
   })),
 ];
 
+// The pressed tab is flat deep blue, without the gloss.
+const PRESSED =
+  "aria-pressed:border-ocean aria-pressed:bg-ocean aria-pressed:bg-none aria-pressed:text-paper";
+
 export default function Toolbar({
   query,
   status,
@@ -24,7 +30,7 @@ export default function Toolbar({
   onStatusChange,
 }: ToolbarProps) {
   return (
-    <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+    <Panel className="mb-6 flex flex-col gap-4 p-4 md:flex-row md:items-center md:justify-between">
       <div className="md:w-96">
         <label htmlFor="search" className="sr-only">
           Search by title
@@ -32,7 +38,7 @@ export default function Toolbar({
         <input
           id="search"
           type="search"
-          className={INPUT_CLASSES}
+          className={`${INPUT_CLASSES} rounded-full`}
           placeholder="Search by title..."
           value={query}
           onChange={(e) => onQueryChange(e.target.value)}
@@ -44,17 +50,16 @@ export default function Toolbar({
         className="flex flex-wrap gap-2"
       >
         {OPTIONS.map(({ value, label }) => (
-          <button
+          <Button
             key={value}
-            type="button"
             aria-pressed={status === value}
             onClick={() => onStatusChange(value)}
-            className="cursor-pointer border-2 border-ink px-3 py-2 text-sm font-bold uppercase tracking-wider hover:bg-ink hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent aria-pressed:bg-ink aria-pressed:text-paper"
+            className={PRESSED}
           >
             {label}
-          </button>
+          </Button>
         ))}
       </div>
-    </div>
+    </Panel>
   );
 }

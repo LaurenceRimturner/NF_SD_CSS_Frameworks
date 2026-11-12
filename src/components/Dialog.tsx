@@ -1,6 +1,9 @@
 import { useEffect, useId, useRef, useState } from "react";
 import type { ReactNode } from "react";
 
+import { GLASS, Shine } from "./Panel";
+import Titlebar from "./Titlebar";
+
 type DialogProps = {
   title: string;
   onClose: () => void;
@@ -27,12 +30,27 @@ export default function Dialog({ title, onClose, children }: DialogProps) {
       ref={ref}
       aria-labelledby={titleId}
       onClose={onClose}
-      className="m-auto w-[calc(100%-2rem)] max-w-lg border-2 border-ink bg-paper p-6 text-ink backdrop:bg-ink/60"
+      className={`${GLASS} m-auto w-[calc(100%-2rem)] max-w-lg bg-sky/30 p-1.5 text-ink shadow-2xl backdrop:bg-ocean/40 backdrop:backdrop-blur-sm`}
     >
-      <h2 id={titleId} className="mb-6 text-3xl font-bold tracking-tight">
-        {title}
-      </h2>
-      {children}
+      <Shine />
+      <div className="relative">
+        <Titlebar>
+          <h2 id={titleId} className="text-lg font-bold">
+            {title}
+          </h2>
+          <button
+            type="button"
+            aria-label="Close"
+            onClick={onClose}
+            className="cursor-pointer rounded-sm border border-crimson bg-crimson/15 bg-linear-to-b from-white/70 from-50% to-white/0 to-50% px-2 text-sm font-bold text-crimson hover:brightness-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean"
+          >
+            &#x2715;
+          </button>
+        </Titlebar>
+        <div className="rounded-lg border border-ocean/30 bg-white/95 p-6">
+          {children}
+        </div>
+      </div>
     </dialog>
   );
 }

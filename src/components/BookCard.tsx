@@ -1,6 +1,10 @@
 import type { Book, Status } from "../types";
+import Button from "./Button";
+import Panel from "./Panel";
 import Rating from "./Rating";
 import StatusBadge from "./StatusBadge";
+import Titlebar from "./Titlebar";
+import WindowControls from "./WindowControls";
 
 type BookCardProps = {
   book: Book;
@@ -9,83 +13,54 @@ type BookCardProps = {
   onDelete?: (book: Book) => void;
 };
 
-type Tone = {
-  card: string;
-  hover: string;
-  filled: string;
+// The glass frame is tinted by status.
+const TINTS: Record<Status, string> = {
+  "want-to-read": "bg-sky/35",
+  reading: "bg-amber/40",
+  done: "bg-leaf/35",
 };
 
-// Each status gets its own surface: outlined, signal yellow, solid black.
-const TONES: Record<Status, Tone> = {
-  "want-to-read": {
-    card: "bg-paper text-ink border-2 border-ink",
-    hover: "hover:bg-ink hover:text-paper",
-    filled: "bg-ink text-paper hover:bg-accent",
-  },
-  reading: {
-    card: "bg-signal text-ink border-2 border-signal",
-    hover: "hover:bg-ink hover:text-signal",
-    filled: "bg-ink text-signal hover:bg-accent hover:text-paper",
-  },
-  done: {
-    card: "bg-ink text-paper border-2 border-ink",
-    hover: "hover:bg-paper hover:text-ink",
-    filled: "bg-paper text-ink hover:bg-accent hover:text-paper",
-  },
-};
-
-const BUTTON =
-  "border-2 border-current px-4 py-2 text-sm font-bold uppercase tracking-wider focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent";
-
+// A book is a Vista window: glass frame with a title bar and (decorative)
+// controls, an opaque white area inside for the content.
 export default function BookCard({
   book,
   index,
   onEdit,
   onDelete,
 }: BookCardProps) {
-  const tone = TONES[book.status];
-
   return (
-    <li className={`flex flex-col gap-6 p-5 ${tone.card}`}>
-      <div className="flex items-start justify-between gap-4">
-        <span
-          aria-hidden="true"
-          className="text-7xl leading-none font-bold tracking-tighter tabular-nums"
-        >
-          {String(index + 1).padStart(2, "0")}
-        </span>
-        <div className="flex flex-col items-end gap-2 pt-1">
-          <StatusBadge status={book.status} />
-          <Rating rating={book.rating} />
+    <li className="flex">
+      <Panel tint={TINTS[book.status]} className="flex w-full flex-col p-1.5">
+        <Titlebar>
+          <span className="text-sm font-bold tabular-nums">
+            Book {String(index + 1).padStart(2, "0")}
+          </span>
+          <WindowControls />
+        </Titlebar>
+        <div className="flex flex-1 flex-col gap-4 rounded-lg border border-ocean/30 bg-white/90 p-5">
+          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+            <StatusBadge status={book.status} />
+            <Rating rating={book.rating} />
+          </div>
+          <div className="flex flex-col gap-1">
+            <h2 className="text-2xl leading-tight font-bold tracking-tight text-ocean">
+              {book.title}
+            </h2>
+            <p className="text-base">{book.author}</p>
+          </div>
+          {book.notes && (
+            <p className="rounded-md border border-ocean/20 bg-sky/10 p-3 text-sm leading-relaxed inset-shadow-sm inset-shadow-ocean/10">
+              {book.notes}
+            </p>
+          )}
+          <div className="mt-auto flex gap-3 pt-2">
+            <Button onClick={() => onEdit?.(book)}>Edit</Button>
+            <Button variant="danger" onClick={() => onDelete?.(book)}>
+              Delete
+            </Button>
+          </div>
         </div>
-      </div>
-      <div className="flex flex-col gap-2">
-        <h2 className="text-3xl leading-tight font-bold tracking-tight">
-          {book.title}
-        </h2>
-        <p className="text-lg opacity-80">{book.author}</p>
-      </div>
-      {book.notes && (
-        <p className="max-w-prose border-l-2 border-current pl-4 text-base leading-relaxed">
-          {book.notes}
-        </p>
-      )}
-      <div className="mt-auto flex gap-3">
-        <button
-          type="button"
-          className={`${BUTTON} ${tone.hover}`}
-          onClick={() => onEdit?.(book)}
-        >
-          Edit
-        </button>
-        <button
-          type="button"
-          className={`${BUTTON} ${tone.filled}`}
-          onClick={() => onDelete?.(book)}
-        >
-          Delete
-        </button>
-      </div>
+      </Panel>
     </li>
   );
 }

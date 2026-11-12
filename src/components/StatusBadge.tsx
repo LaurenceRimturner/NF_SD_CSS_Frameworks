@@ -5,18 +5,20 @@ type StatusBadgeProps = {
   status: Status;
 };
 
-// The shape carries the status too, the color comes from the card (currentColor).
-const ICON_CLASSES: Record<Status, string> = {
-  "want-to-read": "border-2 border-current",
-  reading:
-    "border-2 border-current bg-linear-to-r from-current from-50% to-transparent to-50%",
-  done: "border-2 border-current bg-current",
+// Color and symbol both carry the status.
+const STATUS_STYLES: Record<Status, { symbol: string; color: string }> = {
+  "want-to-read": { symbol: "○", color: "bg-sky" },
+  reading: { symbol: "◐", color: "bg-amber" },
+  done: { symbol: "●", color: "bg-leaf" },
 };
 
 export default function StatusBadge({ status }: StatusBadgeProps) {
+  const { symbol, color } = STATUS_STYLES[status];
   return (
-    <span className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider">
-      <span aria-hidden="true" className={`size-3 ${ICON_CLASSES[status]}`} />
+    <span
+      className={`inline-flex items-center gap-1.5 rounded-full border border-ink/25 bg-linear-to-b from-white/60 from-50% to-white/0 to-50% px-3 py-1 text-xs font-bold shadow-sm shadow-ocean/30 ${color}`}
+    >
+      <span aria-hidden="true">{symbol}</span>
       {STATUS_LABELS[status]}
     </span>
   );

@@ -1,10 +1,12 @@
 import { useState } from "react";
 
+import AeroBackdrop from "./components/AeroBackdrop";
 import BookCard from "./components/BookCard";
 import BookForm from "./components/BookForm";
 import Button from "./components/Button";
 import ConfirmDelete from "./components/ConfirmDelete";
 import EmptyState from "./components/EmptyState";
+import Panel from "./components/Panel";
 import Toast from "./components/Toast";
 import Toolbar from "./components/Toolbar";
 import { filterBooks } from "./books";
@@ -43,9 +45,10 @@ export default function App() {
   }
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-8 md:px-8 md:py-12">
-      <header className="mb-8 flex flex-wrap items-end justify-between gap-4 border-b-2 border-ink pb-4">
-        <h1 className="text-4xl font-bold tracking-tighter md:text-6xl">
+    <main className="mx-auto max-w-7xl px-4 py-6 md:px-8 md:py-10">
+      <AeroBackdrop />
+      <Panel className="mb-6 flex flex-wrap items-center justify-between gap-4 px-5 py-4">
+        <h1 className="text-3xl font-bold tracking-tight text-ocean md:text-5xl">
           Reading List
         </h1>
         <div className="flex items-center gap-4">
@@ -54,7 +57,7 @@ export default function App() {
             + Add book
           </Button>
         </div>
-      </header>
+      </Panel>
       <Toolbar
         query={query}
         status={status}

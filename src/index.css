@@ -3,6 +3,6 @@
 
 @layer base {
   body {
-    @apply bg-paper font-sans text-ink antialiased;
+    @apply min-h-dvh bg-linear-to-br from-sky via-aqua to-leaf bg-fixed font-sans text-ink antialiased;
   }
 }

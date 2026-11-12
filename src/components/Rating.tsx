@@ -4,7 +4,7 @@ type RatingProps = {
 
 export default function Rating({ rating }: RatingProps) {
   if (rating === null) {
-    return <span className="text-sm opacity-80">Not rated</span>;
+    return <span className="text-sm">Not rated</span>;
   }
 
   return (
@@ -13,13 +13,9 @@ export default function Rating({ rating }: RatingProps) {
       aria-label={`Rated ${rating} out of 5`}
       className="flex items-center gap-2"
     >
-      <span aria-hidden="true" className="flex gap-1">
-        {[1, 2, 3, 4, 5].map((n) => (
-          <span
-            key={n}
-            className={`size-3 border-2 border-current ${n <= rating ? "bg-current" : ""}`}
-          />
-        ))}
+      <span aria-hidden="true" className="text-lg leading-none text-amber">
+        {"★".repeat(rating)}
+        <span className="text-ocean/40">{"☆".repeat(5 - rating)}</span>
       </span>
       <span aria-hidden="true" className="text-sm font-bold tabular-nums">
         {rating}/5
