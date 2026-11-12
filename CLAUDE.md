@@ -22,6 +22,7 @@ A reading list built with React 19, TypeScript and Vite. No backend, the data is
 This branch (`feature/bootstrap-book-cards`) uses Bootstrap 5.3 with Sass:
 
 - Use Bootstrap classes only. Customize with Sass variables in `src/index.scss`, set before `@import "bootstrap/scss/bootstrap"`. No other CSS libraries.
+- Colors, font and spacing unit live in `src/tokens.json`, shared with the other branches. `npm run tokens` turns them into Sass variables in `src/_tokens.scss` (do not edit it, `predev` and `prebuild` run it).
 - Own CSS is allowed only for what Bootstrap cannot do (the `<dialog>` size and backdrop), in `src/index.scss`.
 - No inline `style` props. No Bootstrap JavaScript, the dialogs use the native `<dialog>`.
 - Reuse components. Do not repeat long class lists, extract a component.

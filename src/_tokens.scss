@@ -1,0 +1,25 @@
+// Generated from src/tokens.json by scripts/build-tokens.mjs. Do not edit.
+$ink: #111111;
+$paper: #ffffff;
+$accent: #e30613;
+$signal: #ffd400;
+$unit: 0.25rem;
+
+$font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$body-color: $ink;
+$body-bg: $paper;
+$primary: $ink;
+$dark: $ink;
+$danger: $accent;
+$warning: $signal;
+$border-color: $ink;
+$input-border-color: $ink;
+$spacer: $unit * 4;
+$spacers: (
+  0: 0,
+  1: $unit * 1,
+  2: $unit * 2,
+  3: $unit * 4,
+  4: $unit * 6,
+  5: $unit * 12,
+);

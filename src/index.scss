@@ -1,18 +1,12 @@
 // Swiss look: square, flat, black and white with red and yellow accents.
-$font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$body-color: #111;
-$body-bg: #fff;
-$primary: #111;
-$dark: #111;
-$danger: #e30613;
-$warning: #ffd400;
+// Colors, font and spacing come from src/tokens.json (see _tokens.scss).
+@import "tokens";
+
 $enable-rounded: false;
 $enable-shadows: false;
 $border-width: 2px;
-$border-color: #111;
-$input-border-color: #111;
-$focus-ring-color: rgba(227, 6, 19, 0.5);
-$focus-ring-width: 0.25rem;
+$focus-ring-color: rgba($accent, 0.5);
+$focus-ring-width: $unit;
 
 @import "bootstrap/scss/bootstrap";
 
@@ -24,5 +18,5 @@ dialog {
 }
 
 dialog::backdrop {
-  background: rgba(17, 17, 17, 0.6);
+  background: rgba($ink, 0.6);
 }
